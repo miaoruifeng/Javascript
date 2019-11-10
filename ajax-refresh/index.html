@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ajax请求后台，页面数据实时更新</title>
+</head>
+<body>
+    <div id="name"></div>
+    <div id="age"></div>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $("#name").html('this is name');
+        $("#age").html('this is age');
+        setInterval(function() {
+            ajax(); // 每隔5s调一次ajax请求
+        }, 5000);
+        function ajax() {
+            $.ajax({
+                url: './test.json',
+                success: res => {
+                    console.log(res);
+                    //获取到数据实时更新
+                    $("#name").html(res.name);
+                    $("#age").html(res.age);
+                }
+            });
+        }
+    </script>
+</body>
+</html>
