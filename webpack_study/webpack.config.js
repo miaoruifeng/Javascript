@@ -17,7 +17,7 @@ module.exports = {
 		rules: [
 			{
 				test: /\.css$/,
-				use: ['style-loader', 'css-loader']
+				use: ['style-loader', 'css-loader', 'postcss-loader']
 			},
 			{
 				test: /\.less$/,
@@ -26,6 +26,15 @@ module.exports = {
 			{
 				test: /\.scss$/,
 				use: ['style-loader', 'css-loader', 'sass-loader']
+			},
+			{
+				test: /\.jpg|png|gif|bmp|ttf|eot|svg|woff|woff2/,
+				use: ['url-loader?limit=17260']
+			},
+			{
+				test: /\.js$/,
+				use: 'babel-loader',
+				exclude: /node_modules/
 			}
 		]
 	}

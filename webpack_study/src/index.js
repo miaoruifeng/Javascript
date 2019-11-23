@@ -7,3 +7,9 @@ $(function () {
   $("li:even").css('backgroundColor', 'pink')
 	$("li:odd").css('backgroundColor', 'lightblue') 
 })
+
+class Person {
+  static info = 'aaa'
+}
+
+console.log(Person.info)
