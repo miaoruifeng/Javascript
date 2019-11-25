@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // function test(person) {
+        //     person.age = 26
+        //     person = {
+        //         name: 'hzj',
+        //         age: 18
+        //     }
+        //     return person
+        // }
+        // const p1 = {
+        //     name: 'fyq',
+        //     age: 19
+        // }
+        // const p2 = test(p1);
+        // console.log(p1);
+        // console.log(p2);
+
+        // var f3;
+        // function f1() {
+        //     var a = 2
+        //     f3 = function () {
+        //         console.log(a);
+        //     }
+        // }
+        // f1();
+        // f3();
+
+        // for(var i = 1; i <= 5; i ++){
+        //     setTimeout(function timer(){
+        //         console.log(i)
+        //     }, 0)
+        // }
+
+        // for(var i = 1;i <= 5;i++){
+        //     (function(j){
+        //         setTimeout(function timer(){
+        //         console.log(j)
+        //         }, 0)
+        //     })(i)
+        // }
+
+        var dateList = ['2019-01-02 00:02:00.0' ,'2019-05-08 01:05:00.0' ,'2019-06-12 07:02:00.0' ,'2019-10-16 00:02:00.0' ,'2019-11-02 00:00:00.0'];
+        var newArry = [];
+        // dateList.forEach(function(item) {
+        //     newArry.push(item.slice(11, 16));
+        // })
+        // console.log(newArry);
+        for(var i in dateList) {
+            newArry.push(dateList[i].slice(11, 16));
+        }
+        console.log(newArry);
+
+
+        var arry = [226.8233333333, 211.3033333333, 213.34, 210.91, 218.5466666667, 217.3533333333, 215.183, 10, -10.18]
+        var result = []
+        for (let idx in arry) {
+            let item = arry[idx];
+            // console.log(item);
+            let num = String(item).indexOf(".") + 1;
+            // console.log(num);
+            if (num > 2) {
+                item = Math.round(item*100)/100;
+            } else {
+                item = item
+            }
+            result.push(item)
+        }
+        console.log(result)
+
+
+        var x = 4.0; //测试的数字
+        var y = String(x).indexOf(".") + 1; //获取小数点的位置
+        var count = String(x).length - y; //获取小数点后的个数
+        if(y > 0) {
+            console.log("这个数字是小数，有" + count + "位小数");
+        } else {
+            console.log("不是小数");
+        }
+
+
+
+
+
+
+        // 面试
+        function Foo() {
+            getName = function() {
+                console.log(1);
+            }
+            return this;
+        }
+        Foo.getName = function() {
+            console.log(2);
+        }
+        Foo.prototype.getName = function() {
+            console.log(3);
+        }
+        var getName = function() {
+            console.log(4);
+        }
+        function getName() {
+            console.log(5);
+        }
+
+        Foo.getName(); // 2
+        getName(); // 4
+        Foo().getName(); // 1
+        getName(); // 1
+        new Foo.getName(); // 2
+        new Foo().getName(); // 3
+        new new Foo().getName(); // 3
+
+        setTimeout(function() {
+            console.log(1);
+        }, 0);
+        new Promise(function executor(resolve) {
+            console.log(2);
+            for (var i = 0; i < 10000; i++) {
+                i == 9999 && resolve()
+            }
+            console.log(3);
+        }).then(function() {
+            console.log(4);
+        });
+        console.log(5);
+
+
+    </script>
+</body>
+
+</html>
