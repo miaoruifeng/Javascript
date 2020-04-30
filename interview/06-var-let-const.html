@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>var-let-const</title>
+</head>
+<body>
+	<script type="text/javascript">
+		/*
+		* var let const区别总结：
+		* 1) ES6 之前只有 全局作用域和函数(局部)作用域
+		* 	 全局声明的变量可以在全局任何位置都能访问到
+		* 	 局部声明的变量只能在函数内部访问
+		* 2) ES6 之后引入 let 和 const 关键字，有了块级作用域
+		* 	 var 在 {} 块内声明的变量 块外也可以访问
+		* 	 let const 在块内声明的变量 块外不能访问
+		* 3) 重新声明变量问题
+		* 	 允许在程序的任何位置用 var 重新声明变量，但使用 var 会带来问题，
+		* 	 在块中重新声明变量，也将重新声明块外变量，但 let 可以解决这一问题
+		* 4) var声明的变量存在变量提升，let 和 const 声明的变量不存在变量提升
+		* 5) 同一作用域下 let 和 const 不能声明同名变量，var 可以
+		* 6) var 声明的变量会挂载到 window 上，let 和const 声明的变量不会挂载到 window
+		* 7) cosnt 和 let 用法类似
+		* 	 一旦声明，必须赋值，不能使用 null 占位；
+		* 	 声明后不能再修改；
+		* 	 如果声明的是复合类型数据，可以修改其属性
+		*/ 
+
+		// 1. var 声明的变量会挂载到 window 上，let 和const 声明的变量不会挂载到 window；
+		var a = 'a';
+		console.log(a, window.a); // a a
+		// console.log(window);
+		let b = 'b';
+		console.log(b, window.b); // b undefined
+		let c = 'c';
+		console.log(c, window.c); // c undefined
+
+		// 2. var声明的变量存在变量提升，let 和 const 声明的变量不存在变量提升；
+		console.log(aa); // undefined => a已声明还没赋值，默认得到 undefined 值
+		var aa = 'aa';
+		// console.log(bb); // 报错
+		// let bb = 'bb';
+		// console.log(cc); // 报错
+		// let cc = 'cc';
+
+		// 3. let 和 const 声明形成块级作用域
+		/*
+		* es6 之前没有块级作用域，只有全局作用域和函数(局部)作用域
+		* 全局声明的变量可以在全局任何位置都能访问到
+		* 局部声明的变量只能在函数内部访问
+		* es6 提供了块级作用域的概念
+		* var 在 {} 块内声明的变量 块外也可以访问
+		* let const 在块内声明的变量 块外不能访问
+		*/
+		// if (1) {
+		// 	var aaa = 'aaa';
+		// 	console.log(aaa); // aaa
+		// }
+		// console.log(aaa); // aaa
+		if (1) {
+			let aaa = 'aaa';
+			console.log(aaa); // aaa
+		}
+		// console.log(aaa); // aaa is not defined
+
+		// 4. 重新声明变量问题
+		/*
+		* 允许在程序的任何位置用 var 重新声明变量，但使用 var 会带来问题：
+		* 在块中重新声明变量 也将重新声明块外变量
+		* 但 let 可以解决这一问题
+		*/
+		var x = 10;
+		{
+			x = 5;
+			console.log(x); // 5
+		}
+		console.log(x); // 5
+		let y = 10;
+		{
+			let y = 5;
+			console.log(y);  // 5
+		}
+		console.log(y); // 10
+
+		// 5. 同一作用域下 let 和 const 不能声明同名变量，var 可以
+		var s = 100;
+		console.log(s); // 100
+		var s = 200;
+		console.log(s); // 200
+		let w = 300;
+		console.log(w); // 100
+		// let w = 200;
+		// console.log(w); // Identifier 'w' has already been declared
+
+		// cosnt 和 let 用法类似
+		/*
+		* 1) 一旦声明，必须赋值，不能使用 null 占位；
+		* 2) 声明后不能再修改；
+		* 3) 如果声明的是复合类型数据，可以修改其属性
+		*/ 
+
+
+		// for(var i = 0; i < 10; i++) {
+		// 	setTimeout(function() {
+		// 		console.log(i);
+		// 	})
+		// }
+		// for(let i = 0; i < 10; i++) {
+		// 	setTimeout(function() {
+		// 		console.log(i);
+		// 	})
+		// }
+		// for(var i = 0; i < 10; i++) {
+		// 	setTimeout((function(i) {
+		// 		console.log(i);
+		// 	})(i))
+		// }
+	</script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>浅拷贝-深拷贝</title>
+</head>
+<body>
+  <script>
+    /*
+    * js 浅拷贝-深拷贝
+    *
+    * 浅拷贝：
+    * 创建一个新对象，这个对象有着原始对象属性值的一份精确拷贝。
+    * 如果属性是基本类型，拷贝的就是基本类型的值，如果属性是引用类型，拷贝的就是内存地址 ，
+    * 所以如果其中一个对象改变了这个地址，就会影响到另一个对象。
+    *
+    * 深拷贝: 
+    * 将一个对象从内存中完整的拷贝一份出来,从堆内存中开辟一个新的区域存放新对象,
+    * 且修改新对象不会影响原对象
+    * 
+    * 简单点说，浅拷贝拷贝完后，修改拷贝的内容可能会对源内容产生影响
+    * 而深拷贝就是拷贝前后的内容相互不影响。
+    */
+    // 实现浅拷贝
+    // 方法一： Object.assign() 
+    var arr = [1, 2, {a: 1}, function() {}, null, undefined];
+    var result = Object.assign(arr);
+    result[2].a = 123;
+    console.log(arr);
+    console.log(result);
+    // 方法二： 拓展运算符 ...
+    var arr = [1, 2, {a: 1}, function() {}, null, undefined];
+    var result = [...arr];
+    result[2].a = 111;
+    console.log(arr);
+    console.log(result);
+
+    // 实现深拷贝
+    // 方法一： JSON.parse(JSON.stringify())
+    // 这种方法有缺陷：不能实现对function、undefined、NaN的拷贝
+    var arr = [1, [2, 3], {a: 1}, function() {}, null, undefined];
+    var result = JSON.parse(JSON.stringify(arr));
+    result[1][0] = 222;
+    result[2].a = 'hia';
+    console.log(arr);
+    console.log(result);
+
+    // 方法二：递归遍历 -- 这种方法对所有数据类型都能实现深拷贝
+    function deepClone(target) {
+      if (typeof target === 'object') {
+        let cloneTarge = Array.isArray(target) ? [] : {}
+        for (const key in target) {
+          cloneTarge[key] = deepClone(target[key])
+        }
+        return cloneTarge;
+      } else {
+        return target;
+      }
+    }
+    // let obj = {
+    //   name: 'san',
+    //   age: 19,
+    //   child: {
+    //     name: 'ssesa',
+    //     age: 18
+    //   },
+    //   arr: [1, 2, 3]
+    // }
+    // let objNew = {};
+    // objNew = deepClone(obj);
+    // objNew.name = 'hahaa';
+    // objNew.arr[2] = 333;
+    // console.log(obj);
+    // console.log(objNew);
+    var arr = [1, [2, 3], {a: 1}, function() {}, null, undefined];
+    var result = deepClone(arr);
+    result[2].a = 'hia';
+    console.log(arr);
+    console.log(result);
+  </script>
+</body>
+</html>

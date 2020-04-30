@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>Hello World!</div>
+</body>
+
+<script>
+
+    // 时间格式转换
+    function dateFormat(originVal, type) {
+        const dt = new Date(originVal)
+        const y = dt.getFullYear()
+        const m = (dt.getMonth() + 1 + '').padStart(2, '0')
+        const d = (dt.getDate() + '').padStart(2, '0')
+        const hh = (dt.getHours() + '').padStart(2, '0')
+        const mm = (dt.getMinutes() + '').padStart(2, '0')
+        const ss = (dt.getSeconds() + '').padStart(2, '0')
+        if (type === 'date') {
+            return `${y}-${m}-${d}`
+        } else if (type === 'time') {
+            return `${y}-${m}-${d} ${hh}:${mm}:${ss}`
+        }
+    }
+    // console.log(dateFormat(1585692000000, 'date'))
+    // console.log(dateFormat(1585692300000, 'time'))
+
+    // 百分比保留两位小数
+    function toPercent(num) {
+        console.log(typeof (num*100))
+        return (num*100).toFixed(2) + '%'
+    }
+    // console.log(toPercent(1.23456))
+    // console.log(toPercent(1.23656))
+    // console.log(toPercent(1))
+    // console.log(toPercent(0.12345))
+
+    // map 遍历数组 映射到新数组
+    var arr = [
+        {
+            name: 'Jack',
+            age: 18,
+            gender: '男'
+        },
+        {
+            name: 'Lilei',
+            age: 20,
+            gender: '女'
+        },
+        {
+            name: 'Marin',
+            age: 19,
+            gender: '女'
+        }
+    ]
+    var newArr = []
+    var nameArr = []
+    var allArr = [...arr] // 深拷贝 解构赋值给allArr新变量
+    // let temp = {}
+    arr.map(item => {
+        nameArr.push(item.name)
+        let temp = {
+            newName: item.name,
+            newAge: item.age
+        }
+        // temp.newName = item.name,
+        // temp.newAge = item.age,
+        newArr.push(temp)
+    })
+    // console.log(allArr)
+    // console.log(nameArr)
+    // console.log(newArr)
+    // console.log(arr)
+
+    var arr = [1, 10];
+    var start = arr[0]
+    var end = arr[arr.length-1]
+    var newArr = []
+
+    function add () {
+        var timer = setInterval(() => {
+            this.start += 3
+            if (this.start >= this.end) {
+                this.start = this.end
+                clearInterval(timer)
+            }
+            this.newArr.push(this.start)
+            return newArr
+            // console.log(newArr)
+        }, 1);
+        console.log(newArr)
+    }
+    add()
+
+
+
+</script>
+
+</html>

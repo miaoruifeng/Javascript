@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>闭包</title>
+</head>
+<body>
+  <script>
+  	/*
+  	* js 闭包抖函数
+  	*
+		*	闭包是指有权访问另外一个函数作用域中的变量的函数.
+		* 可以理解为：能够读取其他函数内部变量的函数
+		*
+		* 闭包的作用: 正常函数执行完毕后,里面声明的变量被垃圾回收处理掉,
+		* 					 但是闭包可以让作用域里的变量,在函数执行完之后依旧保持没有被垃圾回收处理掉
+		* 闭包的缺陷: 闭包会导致内存占用过高,因为变量都没有释放内存
+  	*/
+  	for (var i = 0; i < 4; i++) {
+  		setTimeout(() => {
+  			console.log(i); // 4
+  		}, 1000)
+  	}
+  	// 通过闭包改变 让正常输出 0 1 2 3
+  	for (var i = 0; i < 4; i++) {
+  		setTimeout((function(i) {
+  			console.log(i);
+  		})(i), 1000)
+  	}
+  </script>
+</body>
+</html>
